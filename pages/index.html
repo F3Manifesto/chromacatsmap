@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html style="height: 100%; margin: 0;">
+
+    <head>
+    <title>Chroma Cats World Map</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="stylesheet" href="./../scripts/leaflet/leaflet.css"/>
+
+    <script src="./../scripts/leaflet/leaflet.js"></script>
+
+
+    </head>
+    
+        <body style="height: 100%; margin: 0;">
+
+            <div id="map" style="height:100%; width:100%; background-color: white; margin: 0;"></div>
+
+            <script type="text/javascript">
+
+                // icons
+                var pointIcon = L.icon({
+                    iconUrl: './../public/images/mapicons/markerchroma.png',
+                    iconSize: [100, 100],
+                    iconAnchor: [50, 80],
+                    popupAnchor: [-3, -76],
+                });
+
+                // some variables
+                var mapSW = [0,4096],
+                    mapNE = [4096,0];
+
+                // declare map & add into div id & set lat/long to 0 + zoom factor 0 furthest
+                var map = L.map('map').setView([0, 0], 2);
+
+                // Indicate tiles to add to map
+                L.tileLayer('./../maptiles/{z}/{x}/{y}.png', {
+                    minZoom:1,
+                    maxZoom:4,
+                    noWrap:true,
+                    crs: L.CRS.simple,
+                }).addTo(map);
+
+                map.setMaxBounds(new L.LatLngBounds(
+                    map.unproject(mapSW, map.getMaxZoom()),
+                    map.unproject(mapNE, map.getMaxZoom())
+                ));
+
+                // Set marker locations 
+                // var marker = L.marker(map.unproec, {
+                //     draggable:true,
+
+                // }).addTo(map);
+                // marker.bindPopup('<b>Chroma Cats!');
+
+                // marker.on('dragend', function(ev) {
+                //     // alert(marker.getLatLng().toString());
+                //     marker.getPopup().setContent(marker.getLatLng().toString());
+                // })
+
+                // Set marker locations 
+                // var marker = L.marker([0,0], {
+                //     draggable:true,
+
+                // }).addTo(map);
+                // marker.bindPopup('<b>Chroma Cats!');
+
+                // marker.on('dragend', function(ev) {
+                //     // alert(marker.getLatLng().toString());
+                //     marker.getPopup().setContent(marker.getLatLng().toString() + '<br/>'
+                //     + map.project(marker.getLatLng(), map.getMaxZoom().toString()));
+                // })
+
+                
+                var sideHouse = L.marker(map.unproject([1674, 1454], map.getMaxZoom()),{icon: pointIcon}).addTo(map);
+                sideHouse.bindPopup('Red House');
+
+                var roofTop = L.marker(map.unproject([2024, 1700], map.getMaxZoom()), {icon: pointIcon}).addTo(map);
+                roofTop.bindPopup('Roof Top');
+
+                var catMouth = L.marker(map.unproject([2330, 1861], map.getMaxZoom()), {icon: pointIcon}).addTo(map);
+                catMouth.bindPopup('Cat Mouth');
+
+                var floatingHouse = L.marker(map.unproject([2598, 1505], map.getMaxZoom()), {icon: pointIcon}).addTo(map);
+                floatingHouse.bindPopup('Floating House');
+
+                var bridge = L.marker(map.unproject([1884, 2265], map.getMaxZoom()), {icon: pointIcon}).addTo(map);
+                bridge.bindPopup('bridge');
+
+                var lowerChamber = L.marker(map.unproject([2172, 2746], map.getMaxZoom()), {icon: pointIcon}).addTo(map);
+                lowerChamber.bindPopup('lower chamber');
+
+                
+
+            </script>
+        
+        </body>
+
+</html>
